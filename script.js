@@ -24,8 +24,10 @@ const matrixVerifyBtn = document.querySelector("#matrixVerify")
 const interVerifyBtn = document.querySelector(".interVerifyBtn")
 const matricCard = document.querySelector(".matricCard")
 const interCard = document.querySelector(".interCard")
+const readMore = document.querySelector("#readMore")
+const hiddenText = document.querySelector(".hiddenText")
 
-
+let hideText = false
 
 
 const usingBox = document.querySelector(".usingBox")
@@ -35,7 +37,7 @@ function sendVisitorNotification() {
   emailjs.send("service_do8rxtn","template_n5e1c09");
 }
 
-sendVisitorNotification()
+// sendVisitorNotification()
 
 
 let skillCards = [usingBox, learningBox, otherBox]
@@ -196,6 +198,20 @@ closeInterBtn.addEventListener("click", function(){
 interVerifyBtn.addEventListener("click", function(){
   interCard.style.display = "block"
   closeInterBtn.style.display = "block"
+})
+
+readMore.addEventListener("click", function(){
+  if(!hideText){
+    hiddenText.style.display = "inline"
+  readMore.innerText = "Hide"
+  hideText = true
+  }
+  else{
+    hiddenText.style.display = "none"
+    readMore.innerText = "Read More"
+    hideText = false
+  }
+ 
 })
 window.botpressWebChat.onEvent(
   function () {
