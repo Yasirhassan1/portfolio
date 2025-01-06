@@ -26,7 +26,12 @@ const matricCard = document.querySelector(".matricCard")
 const interCard = document.querySelector(".interCard")
 const readMore = document.querySelector("#readMore")
 const hiddenText = document.querySelector(".hiddenText")
-
+let eduRound1 = document.querySelector(".eduRound1")
+let eduRound2 = document.querySelector(".eduRound2")
+let eduRound3 = document.querySelector(".eduRound3")
+let skillRound1 = document.querySelector(".skillRound1")
+let skillRound2 = document.querySelector(".skillRound2")
+let skillRound3 = document.querySelector(".skillRound3")
 let hideText = false
 
 
@@ -37,12 +42,14 @@ function sendVisitorNotification() {
   emailjs.send("service_do8rxtn","template_n5e1c09");
 }
 
- sendVisitorNotification()
+// sendVisitorNotification()
 
 
 let skillCards = [usingBox, learningBox, otherBox]
 let educationalCards = [matrixBox, interBox, uniBox]
 let resultSheets = [matricCard, interCard]
+let eduRContainer = [eduRound1, eduRound2, eduRound3]
+let skillRContainer = [skillRound1, skillRound2, skillRound3]
 move = 0
 move2 = 0
 let position = 0;
@@ -76,10 +83,11 @@ function limitColorRight(m, cardBtn, card){
 function goRight(){
 
   if(move<educationalCards.length-1){
-   
+    eduRContainer[move].style.background = "none"
     educationalCards[move].style.display = "none"
     move++
     educationalCards[move].style.display = "flex"
+    eduRContainer[move].style.backgroundColor = "#FFD700"
     
   }
   limitColorLeft(move, educationLeftBtn, educationalCards)
@@ -95,8 +103,12 @@ function goLeft(){
   
   if(move>0){
     educationalCards[move].style.display = "none"
+    eduRContainer[move].style.background = "none"
     move--
     educationalCards[move].style.display = "flex"
+    eduRContainer[move].style.backgroundColor = "#FFD700"
+
+
   }
   limitColorLeft(move, educationLeftBtn, educationalCards)
   limitColorRight(move, educationRightBtn, educationalCards)
@@ -105,8 +117,11 @@ function goLeft(){
 function goSkillLeft(){
   if(move2>0){
     skillCards[move2].style.display = "none"
+    skillRContainer[move2].style.background = "none"
     move2--
     skillCards[move2].style.display = "flex"
+    skillRContainer[move2].style.backgroundColor = "#FFD700"
+
   }
   limitColorLeft(move2, skillLeftBtn, skillCards)
   limitColorRight(move2, skillRightBtn, skillCards)
@@ -115,9 +130,11 @@ function goSkillLeft(){
 function goSkillRight(){
   if(move2<skillCards.length-1){
     skillCards[move2].style.display = "none"
+    skillRContainer[move2].style.background = "none"
     move2++
     skillCards[move2].style.display = "flex"
     skillCards[move2].style.transition = "translateX(-200px)"
+    skillRContainer[move2].style.backgroundColor = "#FFD700"
   }
   limitColorLeft(move2, skillLeftBtn, skillCards)
   limitColorRight(move2, skillRightBtn, skillCards)
