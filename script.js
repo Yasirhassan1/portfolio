@@ -37,7 +37,7 @@ function sendVisitorNotification() {
   emailjs.send("service_do8rxtn","template_n5e1c09");
 }
 
-// sendVisitorNotification()
+ sendVisitorNotification()
 
 
 let skillCards = [usingBox, learningBox, otherBox]
