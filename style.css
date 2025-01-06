@@ -13,13 +13,14 @@ html{
 :root{
     --primaryColor: #FFD700;
     --themeColor: #012429;
-    --paragraphColor: #ACACAC;
+    --paragraphColor: #9E957C;
     --fontColor: white;
     --anchorColor: white;
     --secondaryColor: #0a3336;
     --btnActiveColor: #887200;
 
 }
+
 
 i{
   transition: all 0.3s ease; 
@@ -79,6 +80,7 @@ body{
 
   p {
     @apply text-base lg:text-lg;
+
     color: var(--paragraphColor);
   }
 
@@ -87,3 +89,5 @@ body{
     color: var(--anchorColor);
   }
 }
+
+
