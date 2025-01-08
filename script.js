@@ -42,7 +42,7 @@ function sendVisitorNotification() {
   emailjs.send("service_do8rxtn","template_n5e1c09");
 }
 
- sendVisitorNotification()
+// sendVisitorNotification()
 
 
 let skillCards = [usingBox, learningBox, otherBox]
@@ -80,64 +80,132 @@ function limitColorRight(m, cardBtn, card){
   }
 }
 
-function goRight(){
+let isanimating = false;
 
-  if(move<educationalCards.length-1){
-    eduRContainer[move].style.background = "none"
-    educationalCards[move].style.display = "none"
-    move++
-    educationalCards[move].style.display = "flex"
-    eduRContainer[move].style.backgroundColor = "#FFD700"
-    
+function goRight() {
+  if (isanimating) return; // Prevent multiple animations
+  isanimating = true;
+
+  let opacity = 1;
+  if (move < educationalCards.length - 1) {
+    const intervalId = setInterval(() => {
+      if (opacity <= -10) {
+        clearInterval(intervalId);
+        educationalCards[move].style.display = "none"; // Hide the current card
+        educationalCards[move].style.opacity = "1"; // Reset opacity for the next use
+        eduRContainer[move].style.background = "none";
+        move++;
+        educationalCards[move].style.display = "flex"; // Show the next card
+        eduRContainer[move].style.backgroundColor = "#FFD700";
+        limitColorLeft(move, educationLeftBtn, educationalCards);
+        limitColorRight(move, educationRightBtn, educationalCards);
+        matricCard.style.display = "none";
+        interCard.style.display = "none";
+        closeMatricBtn.style.display = "none";
+        closeInterBtn.style.display = "none";
+        isanimating = false; // Reset the flag after animation completes
+      } else {
+        opacity -= 0.1
+        educationalCards[move].style.opacity = opacity;
+        
+      }
+    }, 2);
+  } else {
+    isanimating = false; // Reset the flag if no animation is needed
   }
-  limitColorLeft(move, educationLeftBtn, educationalCards)
-  limitColorRight(move, educationRightBtn, educationalCards)
-  matricCard.style.display = "none"
-  interCard.style.display = "none"
-  closeMatricBtn.style.display = "none"
-  closeInterBtn.style.display = "none"
-  
 }
 
-function goLeft(){
-  
-  if(move>0){
-    educationalCards[move].style.display = "none"
-    eduRContainer[move].style.background = "none"
-    move--
-    educationalCards[move].style.display = "flex"
-    eduRContainer[move].style.backgroundColor = "#FFD700"
+let isanimatingleft = false;
 
+function goLeft() {
+  if (isanimatingleft) return; // Prevent multiple animations
+  isanimatingleft = true;
 
+  let opacity = 1;
+  if (move > 0) {
+    const intervalId = setInterval(() => {
+      if (opacity <= -10) {
+        clearInterval(intervalId);
+        educationalCards[move].style.display = "none"; // Hide the current card
+        educationalCards[move].style.opacity = "1"; // Reset opacity for the next use
+        eduRContainer[move].style.background = "none";
+        move--;
+        educationalCards[move].style.display = "flex"; // Show the previous card
+        eduRContainer[move].style.backgroundColor = "#FFD700";
+        limitColorLeft(move, educationLeftBtn, educationalCards);
+        limitColorRight(move, educationRightBtn, educationalCards);
+        isanimatingleft = false; // Reset the flag after animation completes
+      } else {
+        educationalCards[move].style.opacity = opacity;
+        opacity -= 0.1;
+      }
+    }, 2);
+  } else {
+    isanimatingleft = false; // Reset the flag if no animation is needed
   }
-  limitColorLeft(move, educationLeftBtn, educationalCards)
-  limitColorRight(move, educationRightBtn, educationalCards)
 }
 
-function goSkillLeft(){
-  if(move2>0){
-    skillCards[move2].style.display = "none"
-    skillRContainer[move2].style.background = "none"
-    move2--
-    skillCards[move2].style.display = "flex"
-    skillRContainer[move2].style.backgroundColor = "#FFD700"
+let isAnimatingLeft = false;
 
+function goSkillLeft() {
+  if (isAnimatingLeft) return; // Prevent multiple animations
+  isAnimatingLeft = true;
+
+  let opacity = 1;
+  if (move2 > 0) {
+    const intervalId = setInterval(() => {
+      if (opacity <= 0) {
+        clearInterval(intervalId);
+        skillCards[move2].style.display = "none";
+        skillCards[move2].style.opacity = "1";
+        skillRContainer[move2].style.background = "none";
+        move2--;
+        skillCards[move2].style.display = "flex";
+        skillRContainer[move2].style.backgroundColor = "#FFD700";
+        limitColorLeft(move2, skillLeftBtn, skillCards);
+        limitColorRight(move2, skillRightBtn, skillCards);
+        isAnimatingLeft = false; // Reset the flag after animation completes
+      } else {
+        opacity -= 0.1;
+        skillCards[move2].style.opacity = opacity;
+        
+      }
+    }, 20);
+  } else {
+    isAnimatingLeft = false; 
   }
-  limitColorLeft(move2, skillLeftBtn, skillCards)
-  limitColorRight(move2, skillRightBtn, skillCards)
 }
 
-function goSkillRight(){
-  if(move2<skillCards.length-1){
-    skillCards[move2].style.display = "none"
-    skillRContainer[move2].style.background = "none"
-    move2++
-    skillCards[move2].style.display = "flex"
-    skillCards[move2].style.transition = "translateX(-200px)"
-    skillRContainer[move2].style.backgroundColor = "#FFD700"
+let isAnimating = false;
+
+function goSkillRight() {
+  if (isAnimating)
+     return; 
+  isAnimating = true;
+
+  let opacity = 1;
+  if (move2 < skillCards.length - 1) {
+    const intervalId = setInterval(() => {
+      if (opacity <= 0) {
+        clearInterval(intervalId);
+        skillCards[move2].style.display = "none";
+        skillCards[move2].style.opacity = "1";
+        skillRContainer[move2].style.background = "none";
+        move2++;
+        skillCards[move2].style.display = "flex";
+        skillRContainer[move2].style.backgroundColor = "#FFD700";
+        limitColorLeft(move2, skillLeftBtn, skillCards);
+        limitColorRight(move2, skillRightBtn, skillCards);
+        isAnimating = false; // Reset the flag after animation completes
+      } else {
+        opacity -= 0.1;
+        skillCards[move2].style.opacity = opacity;
+        
+      }
+    }, 20);
+  } else {
+    isAnimating = false; // Reset the flag if no animation is needed
   }
-  limitColorLeft(move2, skillLeftBtn, skillCards)
-  limitColorRight(move2, skillRightBtn, skillCards)
 }
 menuBtn.addEventListener("click", () => {
     mobileMenu.classList.remove("translate-x-full");
